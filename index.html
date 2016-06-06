@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body id="game" onselectstart="return false">
+	<div id="countdown" v-show="countDownShow">{{ countDown }}</div>
+
+	<div v-bind:class="{ 'visible' : resultPoints }" class="modal-bg"></div>
+	<div id="game-result" v-bind:class="{ 'visible' : resultPoints }">
+		<h4>Pontos<br><br><span>{{ points }}</span></h4>
+		<button v-on:click="hideModal">Continuar</button>
+	</div>
+
+	<div id="game-sidebar">
+		<button v-on:click="startGame" v-bind:class="{ 'hidden': startedGame }" class="startGameBtn" >
+			{{ gameButtonStatus }}
+		</button>
+			
+		<h3>Tempo Restante: <span v-bind:class="{ 'freezed-time': stopTime }">{{ initialTime }}</span></h3>
+		<h3>Pontos: {{ points }}</h3>
+
+	</div>
+	<div id="game-content">
+
+		<div class="crazy-box"
+			 v-bind:class="{ 'started': startedCrazyBox, 'freezed-box': freezed }" 
+			 v-on:click="getPoints"
+			 v-bind:style="{ 	
+			 					top: topPos + 'px' , 
+			 					left: leftPos + 'px' , 
+			 					transitionDuration: ( animationTime / 1000 ) + 's',
+			 					width: box_width + 'px',
+			 					height: box_height + 'px'
+			 				}"
+		></div>
+
+		<div class="crazy-box"
+			 v-bind:class="{ 'started': startedCrazyBox, 'freezed-box': freezed }" 
+			 v-on:click="getPoints"
+			 v-bind:style="{ 	
+			 					top: topPos + 'px' , 
+			 					left: leftPos + 'px' , 
+			 					transitionDuration: ( animationTime / 1000 ) + 's',
+			 					width: box_width + 'px',
+			 					height: box_height + 'px'
+			 				}"
+			 v-show="doubleBox"
+		></div>
+
+	</div>
+
+	<script type="text/javascript" src="vue.min.js"></script>
+	<script type="text/javascript" src="scripts.js"></script>
+</body>
+</html>
